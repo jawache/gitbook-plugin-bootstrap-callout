@@ -1,39 +1,28 @@
 var cheerio = require( "cheerio" )
-   
-var convertBlockquotes = function (page)
+
+var convertAdmonition = function (page)
 {
 	var $ = cheerio.load( page.content );
-	
+
 	// For each blockquote...
-	$( "blockquote" ).each(function () {
-		
-		// Find first h4 header
-		var h4Header = $(this).find('h4:first-child');
-		
-		// Cancel if no header found
-		if( !h4Header || h4Header.length == 0) 
-		{
-			return;
-		}
-		
-		// Split header text
-		var headerParts = $(h4Header).text().split('::', 2);
+	$( ".admonitionblock" ).each(function () {
+
+    // Find type string
+
+    var kind = $(this).find('.title').text();
+    var content = $(this).find('.content');
 
 		// Set style and title
-		var style = headerParts[0].toLowerCase() ? headerParts[0].toLowerCase() : "default";
-		var title = (headerParts[1] === "") ? headerParts[0] : headerParts[1];
+		var style = kind.toLowerCase();
 
 		// Store all segments as array
 		var children = $(this).children().toArray();
-		
-		// Remove the first segment
-		children.shift();
 
 		// Create callout header
-		var calloutHeader = $('<h4>').append(title);
+		var calloutHeader = $('<h4>').text(kind);
 
 		// Create callout bodyy
-		var calloutBody = $('<div>').append(children);
+		var calloutBody = $('<div>').append(content.html());
 
 		// Create callout
 		var callout = $('<div>')
@@ -47,9 +36,9 @@ var convertBlockquotes = function (page)
 		// Remove old blockquote
 		$(this).remove();
 
-		// Replace page content 
+		// Replace page content
 		page.content = $.html();
-		
+
 	});
 
 	return page;
@@ -63,9 +52,9 @@ module.exports = {
 			]
     },
 	hooks: {
-			"page": function(page) 
+			"page": function(page)
 			{
-				page = convertBlockquotes(page);
+				page = convertAdmonition(page);
 				return page;
 	     	}
     }

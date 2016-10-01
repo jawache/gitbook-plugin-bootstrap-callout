@@ -24,10 +24,10 @@
 .callout+.callout {
     margin-top: -5px;
 }
-.callout-default {
+.callout-note {
     border-left-color: #777 !important;
 }
-.callout-default h4 {
+.callout-note h4 {
     color: #777 !important;
 }
 .callout-primary {
@@ -36,23 +36,23 @@
 .callout-primary h4 {
     color: #428bca !important;
 }
-.callout-success {
-    border-left-color: #5cb85c !important;
+.callout-tip {
+    border-left-color: #239CDE !important;
 }
-.callout-success h4 {
-    color: #5cb85c !important;
+.callout-tip h4 {
+    color: #239CDE !important;
 }
-.callout-danger {
-    border-left-color: #d9534f !important;
+.callout-important {
+    border-left-color: #9A372E !important;
 }
-.callout-danger h4 {
-    color: #d9534f !important;
+.callout-important h4 {
+    color: #9A372E !important;
 }
 .callout-warning {
-    border-left-color: #f0ad4e !important;
+    border-left-color: #8A9A27 !important;
 }
 .callout-warning h4 {
-    color: #f0ad4e !important;
+    color: #8A9A27 !important;
 }
 .callout-info {
     border-left-color: #5bc0de !important;
