@@ -44,6 +44,17 @@ var convertAdmonition = function (page)
 	return page;
 };
 
+
+var addSumomeHooks = function (page)
+{
+	var $ = cheerio.load( page.content );
+	$( "#_summary" ).parent().before('<span data-sumome-listbuilder-embed-id="b85478f7-ccfe-4fee-bec2-920dca315028"></span>')
+	page.content = $.html();
+	return page;
+};
+
+
+
 module.exports = {
 	book: {
 			assets: './assets',
@@ -51,10 +62,13 @@ module.exports = {
 				'plugin.css'
 			]
     },
+	filters: {
+    },    
 	hooks: {
 			"page": function(page)
 			{
 				page = convertAdmonition(page);
+				page = addSumomeHooks(page);
 				return page;
 	     	}
     }
